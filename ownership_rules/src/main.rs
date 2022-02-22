@@ -26,6 +26,33 @@ fn main() {
 
     let (s8, len) = calculate_length(s7);
     println!("The length of '{}' is {}.", s8, len);
+
+    // ===========================
+
+    let s8 = String::from("Mama niet!!!");
+    let len = calculate_length_with_reference(&s8);
+    println!("The length of '{}' is {}.", s8, len);
+
+    let mut s9 = String::from("Dawajcie!");
+    let sth = &mut s9;
+    // let sth2 = &mut s9; // Nie można pożyczać więcej niż jeden raz!
+    change_mutable_reference(sth);
+    // println!("{}, {}", sth, sth2);
+
+    // --------------------------
+
+    let mut s10 = String::from("Illegal");
+    let ref1 = &s10;
+    let ref2 = &s10;
+    // let ref3 = &mut s10; // Mutable ref not possible, overlap
+    println!("{} :: {}", ref1, ref2);
+    let ref3 = &mut s10; // Mutable ref possible, no overlap
+    println!("{}", ref3);
+
+    // --------------------------
+
+    let reference_to_nothing = dangle();
+    println!("{}", reference_to_nothing);
 }
 
 fn takes_ownership(some_string: String) {
@@ -56,4 +83,23 @@ fn takes_and_gives_back(some_string: String) -> String {
 fn calculate_length(s: String) -> (String, usize) {
     let length = s.len();
     (s, length)
+}
+
+fn calculate_length_with_reference(s: &String) -> usize {
+    s.len()
+}
+
+fn change_mutable_reference(s: &mut String) {
+    s.push_str("please");
+}
+
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+
+//     &s
+// }
+
+fn dangle() -> String {
+    let s = String::from("hello from hell");
+    s
 }
