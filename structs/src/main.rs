@@ -48,4 +48,5 @@ fn main() {
 
     dbg!(&rect1);
     println!("rect1 is {:?}", &rect1);
+    println!("rect1 is {} and {}", &rect1.width, &rect1.height);
 }
