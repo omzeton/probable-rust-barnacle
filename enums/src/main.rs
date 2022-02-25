@@ -50,4 +50,23 @@ fn main() {
     let some_number = Some(5);
     let some_string = Some("a string");
     let absent_number: Option<i32> = None;
+
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("Max is {}", max),
+        _ => (),
+    }
+    // Is the same as
+    if let Some(max) = config_max {
+        println!("Max is {}", max);
+    }
+
+    let coin = Coin::Dime;
+
+    let mut count = 0;
+    if let Coin::Quarter(state) = coin {
+        println!("State quarter from {:?}!", state);
+    } else {
+        count += 1;
+    }
 }
