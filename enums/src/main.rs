@@ -16,9 +16,38 @@ impl Message {
     }
 }
 
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State {:?}", state);
+            25
+        },
+    }
+}
+
 fn main() {
     let home = IpAddr::V4(String::from("127.0.0.1"));
     let loopback = IpAddr::V4(String::from("::1"));
     let m = Message::Write(String::from("hello"));
     m.call();
+    
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
 }
