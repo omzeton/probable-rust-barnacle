@@ -1,19 +1,8 @@
-enum IpAddrKind {
-    V4,
-    V6,
-}
-
-struct IpAddrOld {
-    kind: IpAddrKind,
-    address: String,
-}
-
-enum IpAddrNew {
-    V4(u8, u8, u8, u8),
+enum IpAddr {
+    V4(String),
     V6(String),
 }
 
-#[derive(Debug)]
 enum Message {
     Quit,
     Move { x: i32, y: i32 },
@@ -23,24 +12,13 @@ enum Message {
 
 impl Message {
     fn call(&self) {
-        println!("{:?}", self);
+        // method body would be defined here
     }
 }
 
 fn main() {
-    println!("Hello, world!");
-    let home = IpAddrOld {
-        kind: IpAddrKind::V4,
-        address: String::from("127.0.0.1"),
-    };
-    
-    let loopback = IpAddrOld {
-        kind: IpAddrKind::V6,
-        address: String::from("::1"),
-    };
-    let home = IpAddrNew::V4(127, 0, 0, 1);
-    let loopback = IpAddrNew::V6(String::from("::1"));
-
-    let m = Message::Write(String::from("Liminal haze"));
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+    let loopback = IpAddr::V4(String::from("::1"));
+    let m = Message::Write(String::from("hello"));
     m.call();
 }
